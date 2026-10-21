@@ -1,0 +1,9 @@
+{
+  "name": "physics-formula-finder",
+  "version": "1.0.0",
+  "description": "Formula for Success — a six-step physics problem-solving wizard: read the problem, list the variables, pick the formula, convert units, substitute, solve for the missing variable.",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}

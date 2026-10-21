@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Work through physics problems with the six-step Formula for Success method: read the problem, list the variables with values and units, choose from 56 curated formulas, convert to SI units, substitute, and solve for the missing variable.">
+  <title>Formula for Success — Physics Problem Solver</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E%E2%9A%9B%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <h1>⚛️ Formula for Success</h1>
+    <p class="tagline">Read the problem → list the variables → pick the formula → convert the units → substitute → solve for the missing variable.</p>
+    <ol id="steps-strip">
+      <li data-step="1">1. Read</li>
+      <li data-step="2">2. List</li>
+      <li data-step="3">3. Select</li>
+      <li data-step="4">4. Convert</li>
+      <li data-step="5">5. Substitute</li>
+      <li data-step="6">6. Solve</li>
+    </ol>
+  </header>
+
+  <main>
+    <section class="step active" id="step-1" data-step="1">
+      <h2>Step 1 · Read the problem</h2>
+      <label for="problem-text">Paste or type your physics problem:</label>
+      <textarea id="problem-text" rows="5" placeholder="A car traveling at 72 km/h brakes at −5.0 m/s². How long until it stops?"></textarea>
+      <label for="examples-select">Or load a worked example:</label>
+      <select id="examples-select"></select>
+      <button type="button" id="load-example">Load example</button>
+    </section>
+
+    <section class="step" id="step-2" data-step="2">
+      <h2>Step 2 · List the variables</h2>
+      <p class="hint">Write down every variable you can find, with its value and units.</p>
+      <table id="variables-table">
+        <thead>
+          <tr>
+            <th scope="col">Variable</th>
+            <th scope="col">Value</th>
+            <th scope="col">Unit</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="variables-body"></tbody>
+      </table>
+      <button type="button" id="add-variable">+ Add variable</button>
+      <div id="vars-summary" class="hint"></div>
+    </section>
+
+    <section class="step" id="step-3" data-step="3">
+      <h2>Step 3 · Select the formula</h2>
+      <div id="match-list"></div>
+      <label for="formula-select">Curated formula list:</label>
+      <select id="formula-select"></select>
+      <div id="formula-info"></div>
+      <label for="target-select">Solve for (the missing variable):</label>
+      <select id="target-select"></select>
+      <div id="target-note" class="hint"></div>
+    </section>
+
+    <section class="step" id="step-4" data-step="4">
+      <h2>Step 4 · Convert to SI units</h2>
+      <div id="convert-preview"></div>
+    </section>
+
+    <section class="step" id="step-5" data-step="5">
+      <h2>Step 5 · Substitute the known values</h2>
+      <div id="substitute-preview"></div>
+    </section>
+
+    <section class="step" id="step-6" data-step="6">
+      <h2>Step 6 · Solve for the missing variable</h2>
+      <div id="result-box"></div>
+      <ol id="steps-list"></ol>
+      <button type="button" id="start-over">Start over</button>
+    </section>
+
+    <nav class="wizard-nav" aria-label="Wizard navigation">
+      <button type="button" id="btn-prev">← Back</button>
+      <button type="button" id="btn-next">Next →</button>
+    </nav>
+  </main>
+
+  <footer>Built for physics students. 56 curated formulas · detailed units · worked steps.</footer>
+
+  <script src="js/units.js"></script>
+  <script src="js/formulas.js"></script>
+  <script src="js/solver.js"></script>
+  <script src="js/finder.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

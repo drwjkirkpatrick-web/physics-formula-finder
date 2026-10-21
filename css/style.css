@@ -1,0 +1,524 @@
+/* ==========================================================================
+   Formula for Success — Physics Problem Solver
+   Static UI shell stylesheet (Builder E)
+   Deep blue / teal accent on a light background · system fonts only
+   No external assets; works from file:// and down to 360 px viewports.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ tokens */
+:root {
+  --font-sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --bg: #f4f8fa;
+  --surface: #ffffff;
+  --panel: #f7fafc;
+  --ink: #1b2a3a;
+  --muted: #5b6d81;
+  --border: #d8e3ec;
+  --border-strong: #b9cbdb;
+
+  --accent: #0e6f78;        /* teal */
+  --accent-ink: #ffffff;   /* text placed on the accent */
+  --accent-deep: #0b3a5f;  /* deep blue */
+  --accent-soft: #e4f1f4;
+
+  --success-soft: #ecf8f1;
+  --success-border: #a5d8bd;
+  --danger: #b3261e;
+
+  --focus-ring: #d97706;   /* amber: visible on light, dark and accent fills */
+
+  --header-grad: linear-gradient(135deg, #0b3a5f 0%, #0e6f78 100%);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(11, 58, 95, 0.06), 0 6px 18px rgba(11, 58, 95, 0.08);
+  --content-max: 48rem;    /* comfortable reading width */
+}
+
+/* -------------------------------------------------------------------- base */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Visible keyboard focus everywhere (high contrast on light and dark). */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ header */
+.site-header {
+  background: var(--header-grad);
+  color: #eef6fa;
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1rem, 4vw, 2rem) clamp(1.25rem, 3vw, 2rem);
+}
+
+.site-header h1 {
+  max-width: var(--content-max);
+  margin: 0 auto 0.4rem;
+  font-size: clamp(1.6rem, 4.5vw, 2.25rem);
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  max-width: var(--content-max);
+  margin: 0 auto 1.4rem;
+  color: #cfe3ec;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  line-height: 1.55;
+}
+
+/* Steps strip: app.js marks the current step with aria-current="step". */
+#steps-strip {
+  list-style: none;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#steps-strip li {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #d9e8f0;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+#steps-strip li[aria-current="step"] {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0b3a5f;
+  font-weight: 700;
+}
+
+/* -------------------------------------------------------------------- main */
+main {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3.5vw, 2.5rem) clamp(1rem, 4vw, 2rem) 2rem;
+}
+
+/* Step sections: subtle cards; only the active one is displayed. */
+.step {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.25rem, 3.5vw, 2rem);
+  margin-bottom: 1.5rem;
+}
+
+.step.active { display: block; }
+
+.step h2 {
+  margin: 0 0 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: clamp(1.2rem, 3.2vw, 1.45rem);
+}
+
+.step p { max-width: 65ch; }
+
+/* --------------------------------------------------------- labels & forms */
+label {
+  display: block;
+  margin: 1.35rem 0 0.4rem;
+  font-weight: 600;
+}
+
+/* Tighten the first control right under a heading. */
+.step h2 + label { margin-top: 0.1rem; }
+#match-list:empty + label,
+#formula-info:empty + label { margin-top: 0.1rem; }
+
+textarea,
+select {
+  display: block;
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+select { max-width: 26rem; }
+
+/* ----------------------------------------------------------------- buttons */
+button {
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.15rem;
+  margin-top: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+button:hover {
+  background: var(--accent-deep);
+  color: var(--accent-ink);
+}
+
+button:active { transform: translateY(1px); }
+
+/* Secondary (outline) actions: Back and Start over. */
+#btn-prev,
+#start-over {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--accent-deep);
+}
+
+#btn-prev:hover,
+#start-over:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+/* ------------------------------------------------------------- wizard nav */
+.wizard-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.25rem 0.1rem;
+}
+
+.wizard-nav button {
+  margin-top: 0;
+  min-width: 7.5rem;
+}
+
+/* ------------------------------------------------------------------- hints */
+.hint {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#vars-summary,
+#target-note { margin: 0.75rem 0 0; }
+
+/* -------------------------------------------- variables table (Step 2) */
+/* display:block + overflow-x:auto lets the table scroll horizontally on
+   narrow screens without needing a wrapper element. */
+#variables-table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin-top: 0.25rem;
+}
+
+#variables-table th,
+#variables-table td {
+  text-align: left;
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+#variables-table thead th {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 2px solid var(--border-strong);
+  white-space: nowrap;
+}
+
+/* Best-effort styling for the rows app.js injects into #variables-body. */
+#variables-table input,
+#variables-table select {
+  width: 100%;
+  min-width: 6rem;
+  font: inherit;
+  padding: 0.4rem 0.55rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+}
+
+#variables-table input { font-family: var(--font-mono); }
+
+#variables-table button {
+  margin: 0;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------- dynamic output regions */
+/* Empty containers stay invisible until app.js fills them. */
+#vars-summary:empty,
+#target-note:empty,
+#match-list:empty,
+#formula-info:empty,
+#convert-preview:empty,
+#substitute-preview:empty,
+#result-box:empty,
+#steps-list:empty { display: none; }
+
+#match-list { margin: 0.25rem 0; }
+#match-list ul,
+#match-list ol { margin: 0.4rem 0; padding-left: 1.3rem; }
+#match-list li { margin: 0.3rem 0; }
+
+#formula-info {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+
+#formula-info > :first-child { margin-top: 0; }
+#formula-info > :last-child { margin-bottom: 0; }
+
+/* Equations render in the monospace stack wherever app.js marks them,
+   and the pure-equation panels use it throughout. */
+.equation,
+.eq { font-family: var(--font-mono); font-size: 1.05em; }
+
+#convert-preview,
+#substitute-preview {
+  margin-top: 0.25rem;
+  padding: 0.9rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre-wrap;      /* keeps app.js line breaks, still wraps on 360px */
+  overflow-wrap: break-word;
+}
+
+/* ------------------------------------------------- result & worked steps */
+#result-box {
+  margin-top: 0.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* Celebratory but tasteful: soft success panel once an answer appears. */
+#result-box:has(.answer) {
+  background: var(--success-soft);
+  border-color: var(--success-border);
+  box-shadow: 0 0 0 4px rgba(28, 124, 79, 0.10);
+  padding: 1.35rem 1.5rem;
+}
+
+#result-box .answer {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-mono);
+  font-size: clamp(1.45rem, 5vw, 2rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.25;
+}
+
+.error {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+#steps-list {
+  margin: 1.4rem 0 0;
+  padding-left: 1.5rem;
+}
+
+#steps-list li { margin: 0.5rem 0; }
+#steps-list li strong { color: var(--accent-deep); }
+
+/* ------------------------------------------------------------------ footer */
+footer {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem) 2.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------- small screens */
+@media (max-width: 480px) {
+  .wizard-nav { flex-wrap: wrap; }
+  .wizard-nav button { flex: 1 1 auto; min-width: 0; }
+  #steps-strip { gap: 0.4rem; }
+  #steps-strip li { padding: 0.26rem 0.7rem; font-size: 0.8rem; }
+  select { max-width: 100%; }
+  #result-box:has(.answer) { padding: 1.1rem; }
+}
+
+/* ------------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------------ dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d151e;
+    --surface: #15212d;
+    --panel: #101b26;
+    --ink: #e6edf4;
+    --muted: #9db0c2;
+    --border: #27394d;
+    --border-strong: #3d5470;
+
+    --accent: #43b3bb;
+    --accent-ink: #04282c;
+    --accent-deep: #9cc7e0;
+    --accent-soft: #123037;
+
+    --success-soft: #102e22;
+    --success-border: #2f6b50;
+    --danger: #f2b8b5;
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.40), 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  /* The header already sits on a deep-blue gradient; the white active
+     pill keeps its dark-blue text for contrast in both schemes. */
+}
+
+/* ---------------------------------------------------------------- print */
+/* A student can print the fully worked solution: every step shows,
+   chrome (strip, nav, buttons) disappears. */
+@media print {
+  @page { margin: 1.5cm; }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+    font-size: 11pt;
+  }
+
+  .site-header {
+    background: none;
+    color: #000000;
+    padding: 0 0 0.75rem;
+    border-bottom: 2px solid #000000;
+  }
+
+  .site-header h1 { color: #000000; margin-bottom: 0.2rem; }
+  .tagline { color: #333333; margin-bottom: 0.5rem; }
+
+  #steps-strip,
+  .wizard-nav,
+  button { display: none !important; }
+
+  main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .step {
+    display: block !important;   /* print ignores .active */
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+
+  .step + .step {
+    border-top: 1px solid #bbbbbb;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+  }
+
+  .step h2 {
+    color: #000000;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  textarea,
+  select,
+  #convert-preview,
+  #substitute-preview,
+  #formula-info,
+  #result-box {
+    background: #ffffff;
+    border: 1px solid #777777;
+    box-shadow: none;
+    color: #000000;
+  }
+
+  /* Never clip scrolled content on paper. */
+  #variables-table {
+    display: table;
+    overflow: visible;
+  }
+
+  #variables-table th,
+  #variables-table td { border-color: #999999; }
+
+  #result-box:has(.answer) {
+    background: #ffffff;
+    border: 2px solid #000000;
+    box-shadow: none;
+  }
+
+  #result-box .answer { color: #000000; font-size: 14pt; }
+  #steps-list li strong { color: #000000; }
+  #formula-info { border-left-color: #000000; }
+
+  footer {
+    color: #444444;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid #999999;
+  }
+}
